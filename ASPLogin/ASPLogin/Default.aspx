@@ -9,10 +9,8 @@
 </head>
 <body style="height: 213px">
     <form id="form1" runat="server">
-        <p class="indented">
-            &nbsp;</p>
         <div>
-        <asp:Panel ID="Panel1" runat="server" BorderStyle="Solid" BorderWidth="1px">
+        <asp:Panel ID="Panel1" runat="server" BorderStyle="Solid" BorderWidth="1px" Height="263px">
             
                 <p>
                     Login</p>
@@ -30,7 +28,12 @@
                 </p>
             
                 <p>
-                    &nbsp;</p>
+                    <asp:RadioButtonList ID="RadioButtonList1" runat="server">
+                        <asp:ListItem>Desktop Window</asp:ListItem>
+                        <asp:ListItem>Desktop Door</asp:ListItem>
+                        <asp:ListItem>Laptop</asp:ListItem>
+                    </asp:RadioButtonList>
+                </p>
                 <p>
                     &nbsp;</p>
                 <p>

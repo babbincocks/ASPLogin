@@ -58,6 +58,15 @@ namespace ASPLogin {
         protected global::System.Web.UI.WebControls.Button btnSubmit;
         
         /// <summary>
+        /// RadioButtonList1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList RadioButtonList1;
+        
+        /// <summary>
         /// txtLoginAttempts control.
         /// </summary>
         /// <remarks>

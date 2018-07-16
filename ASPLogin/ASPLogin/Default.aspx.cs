@@ -18,48 +18,67 @@ namespace ASPLogin
         {
             if (Page.IsPostBack)
             {
-                if (txtLogin.Text.Any())
+                try
                 {
-                    if (txtPass.Text.Any())
+                    if (txtLogin.Text.Any())
                     {
-                        //string connString = @"Server=PL1\MTCDB;Database=Sandbox;Trusted_Connection=True;" ;
-                        SqlConnection sqlConn = new SqlConnection(WebConfigurationManager.ConnectionStrings["DesktopSchool"].ConnectionString);
-
-                        SqlDataAdapter sqlAdapt = new SqlDataAdapter("dbo.sp_AllUserInfo", sqlConn);
-
-                        DataTable dtUsers = new DataTable();
-
-                        sqlAdapt.Fill(dtUsers);
-
-                        DataRow[] result = dtUsers.Select("Username = '" + txtLogin.Text + "'");
-                        if(result.Length != 0)
+                        if (txtPass.Text.Any())
                         {
-                            if(result[0].ItemArray[1].ToString() == txtPass.Text)
+                            //string connString = @"Server=PL1\MTCDB;Database=Sandbox;Trusted_Connection=True;" ;
+                            SqlConnection sqlConn = new SqlConnection();
+                            if (RadioButtonList1.SelectedIndex == 0)
                             {
-                                Response.Write("We found your record! It says that you're smelly. That's unfortunate.");
+                                sqlConn = new SqlConnection(WebConfigurationManager.ConnectionStrings["DesktopWindow"].ConnectionString);
+                            }
+                            else if (RadioButtonList1.SelectedIndex == 1)
+                            {
+                                sqlConn = new SqlConnection(WebConfigurationManager.ConnectionStrings["DesktopDoor"].ConnectionString);
+                            }
+                            else if (RadioButtonList1.SelectedIndex == 2)
+                            {
+
+                            }
+
+                            SqlDataAdapter sqlAdapt = new SqlDataAdapter("dbo.sp_AllUserInfo", sqlConn);
+
+                            DataTable dtUsers = new DataTable();
+
+                            sqlAdapt.Fill(dtUsers);
+
+                            DataRow[] result = dtUsers.Select("Username = '" + txtLogin.Text + "'");
+                            if (result.Length != 0)
+                            {
+                                if (result[0].ItemArray[1].ToString() == txtPass.Text)
+                                {
+                                    Response.Write("We found your record! It says that you're smelly. That's unfortunate.");
+                                }
+                                else
+                                {
+                                    Response.Write("Good news: you exist. Bad news: your password seems to be incorrect.");
+                                }
                             }
                             else
                             {
-                                Response.Write("Good news: you exist. Bad news: your password seems to be incorrect.");
+                                Response.Write("Login could not be found.");
                             }
                         }
                         else
                         {
-                            Response.Write("Login could not be found.");
+                            Response.Write("Please put in a password.");
                         }
+                    }
+                    else if (txtPass.Text.Any())
+                    {
+                        Response.Write("Please put in a login name.");
                     }
                     else
                     {
-                        Response.Write("Please put in a password.");
+                        Response.Write("Please put in your login information.");
                     }
                 }
-                else if (txtPass.Text.Any())
+                catch(Exception ex)
                 {
-                    Response.Write("Please put in a login name.");
-                }
-                else
-                {
-                    Response.Write("Please put in your login information.");
+                    Response.Write(ex.Message);
                 }
             }
         }
