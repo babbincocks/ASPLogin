@@ -36,7 +36,7 @@ namespace ASPLogin
                             }
                             else if (RadioButtonList1.SelectedIndex == 2)
                             {
-
+                                sqlConn = new SqlConnection(WebConfigurationManager.ConnectionStrings["Laptop"].ConnectionString);
                             }
 
                             SqlDataAdapter sqlAdapt = new SqlDataAdapter("dbo.sp_AllUserInfo", sqlConn);
